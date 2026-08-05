@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return MaterialApp(
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
@@ -30,6 +31,45 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: [Locale('fa')], // farsi
       theme: ThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(
+            width: 2,
+          )
+          ),
+
+        ),
+
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          
+          
+          style: ButtonStyle(
+            
+                    // ignore: non_constant_identifier_names
+                    textStyle: WidgetStateProperty.resolveWith((States) {
+                      if (States.contains(WidgetState.pressed)) {
+                        return TextStyle(            fontFamily: 'vanil',
+            fontSize: 17,
+            fontWeight: FontWeight.w700,
+            color: Color.fromARGB(255, 255, 255, 255));
+                      }
+                      return TextStyle(            fontFamily: 'vanil',
+            fontSize: 15,
+            fontWeight: FontWeight.w300,
+            color: Color.fromARGB(200, 255, 255, 255));
+                    }),
+
+                    backgroundColor: WidgetStateProperty.resolveWith((states) {
+                      if (states.contains(WidgetState.pressed)) {
+                        return Color.fromARGB(255, 40, 107, 184);
+                      }
+                      return Color.fromARGB(255, 68, 4, 87);
+                    }),
+                  ),
+        ),
+
+
+
         fontFamily: 'vanil',
 
         textTheme: const TextTheme(
@@ -68,11 +108,17 @@ class MyApp extends StatelessWidget {
             color: Color.fromARGB(255, 70, 70, 70),
             fontWeight: FontWeight.w700,
           ),
+          bodyMedium: TextStyle(
+            fontFamily: "vanil",
+            fontSize: 15,
+            color: SolidColors.hintText,
+            fontWeight: FontWeight.w700,
+          )
         ),
       ),
       debugShowCheckedModeBanner: false,
       // home: SplashScreen(),
-      home: MainScreen(),
+      home: RegisterIntro(),
     );
   }
 }
