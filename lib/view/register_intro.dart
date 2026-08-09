@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tec/my_colors.dart';
 import 'package:tec/my_strings.dart';
+import 'package:tec/view/my_cats.dart';
+import 'package:validators/validators.dart';
 
 class RegisterIntro extends StatelessWidget {
   const RegisterIntro({super.key});
@@ -31,51 +33,7 @@ class RegisterIntro extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 32),
                 child: ElevatedButton(
                   onPressed: () {
-                    showModalBottomSheet(
-                      isScrollControlled: true,
-                      context: context,
-                      backgroundColor: Colors.transparent,
-                      builder: ((contex) {
-                        return Padding(
-                          padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                          child: Container(
-                            height: size.height / 3,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(30),
-                                topRight: Radius.circular(30),
-                              ),
-                            ),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(MyStrings.insertYourEmail,style: textTheme.bodySmall,),
-                                  Padding(
-                                    padding: const EdgeInsets.all(24),
-                                    child: TextField(
-                                      textAlign: TextAlign.center,
-                                      decoration: InputDecoration(
-                                        hintText: "techblog@gmail.com",
-                                        hintStyle: textTheme.bodyMedium
-                                      ),
-                                    ),
-                                  ),
-                                  ElevatedButton
-                                  (onPressed: ((){}),
-                                  style: ElevatedButton.styleFrom(
-                                    foregroundColor: Colors.white
-                                  ),
-                                   child: Text("ادامه"),
-                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      }),
-                    );
+                    _showEmailBottunSheet(context, size, textTheme);
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -87,6 +45,133 @@ class RegisterIntro extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> _showEmailBottunSheet(
+    BuildContext context,
+    Size size,
+    TextTheme textTheme,
+  ) {
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: ((contex) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Container(
+            height: size.height / 3,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(MyStrings.insertYourEmail, style: textTheme.bodySmall),
+                  Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: TextField(
+                      onChanged: (value) {
+                        isEmail(value);
+
+                        print(
+                          value + " is Email : " + isEmail(value).toString(),
+                        );
+                      },
+                      style: textTheme.bodyMedium,
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        hintText: "techblog@gmail.com",
+                        hintStyle: textTheme.bodyMedium,
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: (() {
+                      Navigator.pop(contex);
+                      _activateCodeBottunSheet(context, size, textTheme);
+                    }),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                    ),
+                    child: Text("ادامه"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }),
+    );
+  }
+
+  Future<dynamic> _activateCodeBottunSheet(
+    BuildContext context,
+    Size size,
+    TextTheme textTheme,
+  ) {
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: ((contex) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Container(
+            height: size.height / 3,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(MyStrings.activateCode, style: textTheme.bodySmall),
+                  Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: TextField(
+                      onChanged: (value) {
+                        isInt(value);
+
+                        print(value + " is code : " + isInt(value).toString());
+                      },
+                      style: textTheme.bodyMedium,
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        hintText: "******",
+                        hintStyle: textTheme.bodyMedium,
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: (() {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (contex) => MyCats()));
+                    }),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                    ),
+                    child: Text("ادامه"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }),
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tec/my_colors.dart';
 import 'package:tec/view/home_screnn.dart';
+import 'package:tec/view/my_cats.dart';
 import 'package:tec/view/profile_screen.dart';
+import 'package:tec/view/register_intro.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -50,6 +52,9 @@ class _MainScreenState extends State<MainScreen> {
                     textTheme: textTheme,
                     bodymargin: bodymargin,
                   ),
+// یادت باشه که الکیه
+                  RegisterIntro(),
+                  
                 ],
               ),
             ),
@@ -117,7 +122,7 @@ class BottomNavigation extends StatelessWidget {
                 ),
 
                 IconButton(
-                  onPressed: (() {}),
+                  onPressed: (() => changeScreen(2)),
                   icon: ImageIcon(
                     AssetImage("assets/icons/par.png"),
                     color: Colors.white,

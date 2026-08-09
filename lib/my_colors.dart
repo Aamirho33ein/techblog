@@ -4,6 +4,7 @@ class SolidColors {
   static const Color colorTitle = Color.fromARGB(255, 40, 107, 184);
   static const Color textTitle = Color.fromARGB(255, 0, 0, 0);
   static const Color scofoldBg = Color.fromARGB(255, 255, 255, 255);
+  static const Color serface = Color.fromARGB(255, 242, 242, 242);
   static const Color hintText = Color.fromARGB(255, 219, 219, 219);
   static const Color statusBarColor = Color.fromARGB(255, 255, 255, 255);
   static const Color systemNvigationBarColor = Color.fromARGB(

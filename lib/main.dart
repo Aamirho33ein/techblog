@@ -111,14 +111,14 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(
             fontFamily: "vanil",
             fontSize: 15,
-            color: SolidColors.hintText,
+            color: Color.fromARGB(255, 154, 154, 154),
             fontWeight: FontWeight.w700,
           )
         ),
       ),
       debugShowCheckedModeBanner: false,
       // home: SplashScreen(),
-      home: RegisterIntro(),
+      home: MainScreen(),
     );
   }
 }
