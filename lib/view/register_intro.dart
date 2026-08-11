@@ -14,6 +14,7 @@ class RegisterIntro extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +62,7 @@ class RegisterIntro extends StatelessWidget {
         return Padding(
           padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Container(
-            height: size.height / 3 ,
+            height: size.height / 2.5,
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(

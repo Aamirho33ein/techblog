@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               textTheme: textTheme,
             ),
 
-            const SizedBox(height: 70),
+            const SizedBox(height: 40),
 
             SeeMorePodcast(bodymargin: bodymargin, textTheme: textTheme),
 
@@ -165,7 +165,7 @@ class HomePageBlogList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: size.height / 4.3,
+      height: size.height / 3.95,
       child: ListView.builder(
         itemCount: blogList.getRange(0, 5).length,
         scrollDirection: Axis.horizontal,
@@ -233,15 +233,18 @@ class HomePageBlogList extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: size.height/50,
-                  width: size.width / 3,
-                  child: Text(
-                    blogList[index].title,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+              SizedBox(
+                width: size.width/2.5,
+                child: Text(
+                  blogList[index].title,
+                  style: TextStyle(
+                    color: SolidColors.textTitle,
+                    fontWeight: FontWeight.normal,
                   ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                 ),
+              ),
               ],
             ),
           );

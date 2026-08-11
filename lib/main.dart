@@ -119,7 +119,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       // home: SplashScreen(),
-      home: MyCats(),
+      home: MainScreen(),
     );
   }
 }

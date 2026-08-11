@@ -41,12 +41,12 @@ class _MainScreenState extends State<MainScreen> {
                   title: Text("پروفایل کاربری", style: textTheme.bodySmall),
                   onTap: () {},
                 ),
-                const Divider(color: SolidColors.dividerColor),
+                const Divider(color: Color.fromARGB(255, 188, 188, 188)),
                 ListTile(
                   title: Text("درباره تک بلاگ", style: textTheme.bodySmall),
                   onTap: () {},
                 ),
-                const Divider(color: SolidColors.dividerColor),
+                const Divider(color:  Color.fromARGB(255, 188, 188, 188)),
                 ListTile(
                   title: Text(
                     "اشتراک گذاری تک بلاگ",
@@ -54,12 +54,12 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   onTap: () {},
                 ),
-                const Divider(color: SolidColors.dividerColor),
+                const Divider(color: Color.fromARGB(255, 188, 188, 188)),
                 ListTile(
                   title: Text("تک بلاگ در گیت هاب", style: textTheme.bodySmall),
                   onTap: () {},
                 ),
-                const Divider(color: SolidColors.dividerColor),
+                const Divider(color: Color.fromARGB(255, 188, 188, 188)),
               ],
             ),
           ),

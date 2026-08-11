@@ -23,11 +23,11 @@ List<HasTagModel> selectedTags = [];
 
 List<BlogModel> blogList = [
   BlogModel(
-    id: 1,
+    id: 0,
     imageUrl:
-        "https://static.digiato.com/digiato/2026/07/chris-nolan-910x600.jpg.webp",
-    title: "امیرحسین",
-    writer: "پرستو حبیب پور",
+        "https://vigiato.net/wp-content/uploads/2026/08/hero-image.fill_.size_1248x702.v1786360680-791x482.jpg",
+    title: "نقد سریال خاندان اژدها (House of The Dragon) | فصل سوم، قسمت آخر",
+    writer: "ایمان اکرمی ",
     writerImageUrl:
         "https://digiato.com/wp-content/uploads/avatars/58838-1769580150-32x32.jpg",
     date: "2 روز پیش",
@@ -37,62 +37,62 @@ List<BlogModel> blogList = [
   BlogModel(
     id: 1,
     imageUrl:
-        "https://static.digiato.com/digiato/2026/07/chris-nolan-910x600.jpg.webp",
-    title: "امیرحسین",
-    writer: "پرستو حبیب پور",
+        "https://vigiato.net/wp-content/uploads/2026/08/qkD4WWUD4boVc2y6EtHLEV-910x600.jpg",
+    title: "شایعه: Marvel’s Spider-Man 3 در حال توسعه است",
+    writer: "رایکا شریفی",
     writerImageUrl:
         "https://digiato.com/wp-content/uploads/avatars/58838-1769580150-32x32.jpg",
-    date: "2 روز پیش",
+    date: "1 روز پیش",
     content: "هیچ اطلاعاتی ندرام",
-    views: "256",
+    views: "325",
   ),
   BlogModel(
-    id: 1,
+    id: 2,
     imageUrl:
-        "https://static.digiato.com/digiato/2026/07/chris-nolan-910x600.jpg.webp",
-    title: "امیرحسین",
-    writer: "پرستو حبیب پور",
+        "https://vigiato.net/wp-content/uploads/2026/08/ps5-wolverine-models-910x600.jpg",
+    title: "نسخه محدود کنسول PS5 با طرح Marvel’s Wolverine معرفی شد",
+    writer: "علیرضا طالقانی",
     writerImageUrl:
         "https://digiato.com/wp-content/uploads/avatars/58838-1769580150-32x32.jpg",
-    date: "2 روز پیش",
+    date: "4 روز پیش",
     content: "هیچ اطلاعاتی ندرام",
-    views: "256",
+    views: "139",
   ),
   BlogModel(
-    id: 1,
+    id: 3,
     imageUrl:
-        "https://static.digiato.com/digiato/2026/07/chris-nolan-910x600.jpg.webp",
-    title: "امیرحسین",
-    writer: "پرستو حبیب پور",
+        "https://vigiato.net/wp-content/uploads/2026/08/kamiya-main-1702638194160-910x600.webp",
+    title: "هیدکی کامیا: اگر Devil May Cry دیگری بسازم، بخش‌های مبهم داستان روشن خواهد شد",
+    writer: "نیما زند",
     writerImageUrl:
         "https://digiato.com/wp-content/uploads/avatars/58838-1769580150-32x32.jpg",
-    date: "2 روز پیش",
+    date: "1 روز پیش",
     content: "هیچ اطلاعاتی ندرام",
-    views: "256",
+    views: "563",
   ),
   BlogModel(
-    id: 1,
+    id: 4,
     imageUrl:
-        "https://static.digiato.com/digiato/2026/07/chris-nolan-910x600.jpg.webp",
-    title: "امیرحسین",
-    writer: "پرستو حبیب پور",
+        "https://vigiato.net/wp-content/uploads/2026/08/01KGFSVT0TGAGQQ927N9DE9043-910x565.jpeg",
+    title: "جف کیلی تاریخ مراسم The Game Awards سال ۲۰۲۶ را اعلام کرد",
+    writer: "رایکا شریفی",
     writerImageUrl:
         "https://digiato.com/wp-content/uploads/avatars/58838-1769580150-32x32.jpg",
-    date: "2 روز پیش",
+    date: "9 روز پیش",
     content: "هیچ اطلاعاتی ندرام",
-    views: "256",
+    views: "974",
   ),
   BlogModel(
-    id: 1,
+    id: 5,
     imageUrl:
-        "https://static.digiato.com/digiato/2026/07/chris-nolan-910x600.jpg.webp",
-    title: "امیرحسین",
-    writer: "پرستو حبیب پور",
+        "https://vigiato.net/wp-content/uploads/2026/08/images-6.jpeg",
+    title: "50 Cent تهیه‌کنندگی سریال Payday را بر عهده گرفت",
+    writer: " احسان حسین خواه",
     writerImageUrl:
         "https://digiato.com/wp-content/uploads/avatars/58838-1769580150-32x32.jpg",
-    date: "2 روز پیش",
+    date: "12 روز پیش",
     content: "هیچ اطلاعاتی ندرام",
-    views: "256",
+    views: "1054",
   ),
   BlogModel(
     id: 1,
