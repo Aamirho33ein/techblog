@@ -25,7 +25,11 @@ class _MyCatsState extends State<MyCats> {
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Padding(
-            padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin,top: 32),
+            padding: EdgeInsets.only(
+              right: bodyMargin,
+              left: bodyMargin,
+              top: 32,
+            ),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -38,29 +42,30 @@ class _MyCatsState extends State<MyCats> {
                     MyStrings.successfulRegistration,
                     style: TextStyle(
                       fontFamily: 'vanil',
-            fontSize: 15,
-            color: SolidColors.primeryColor,
-            fontWeight: FontWeight.w700,
+                      fontSize: 15,
+                      color: SolidColors.primeryColor,
+                      fontWeight: FontWeight.w700,
                     ),
-                    
                   ),
                   SizedBox(height: 32),
                   TextField(
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
-
                       alignLabelWithHint: true,
                       hintText: "نام و نام خانوادگی",
                       hintStyle: textTheme.bodyMedium,
                     ),
                   ),
                   SizedBox(height: 32),
-                  Text(MyStrings.chooseCat, style: TextStyle(
+                  Text(
+                    MyStrings.chooseCat,
+                    style: TextStyle(
                       fontFamily: 'vanil',
-            fontSize: 15,
-            color: SolidColors.primeryColor,
-            fontWeight: FontWeight.w700,
-                    ),),
+                      fontSize: 15,
+                      color: SolidColors.primeryColor,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                   // tagList
                   Padding(
                     padding: const EdgeInsets.only(top: 32),
@@ -83,7 +88,11 @@ class _MyCatsState extends State<MyCats> {
                           return InkWell(
                             onTap: (() {
                               setState(() {
-                                selectedTags.add(tagList[index]);
+                                if (!selectedTags.contains(tagList[index])) {
+                                  selectedTags.add(tagList[index]);
+                                } else {
+                                  print("exist");
+                                }
                               });
                             }),
                             child: MainTags(textTheme: textTheme, index: index),

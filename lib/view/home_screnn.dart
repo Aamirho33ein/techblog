@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               textTheme: textTheme,
             ),
 
-            const SizedBox(height: 55),
+            const SizedBox(height: 70),
 
             SeeMorePodcast(bodymargin: bodymargin, textTheme: textTheme),
 
@@ -234,7 +234,8 @@ class HomePageBlogList extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: size.width / 2.4,
+                  height: size.height/50,
+                  width: size.width / 3,
                   child: Text(
                     blogList[index].title,
                     overflow: TextOverflow.ellipsis,

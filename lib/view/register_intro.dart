@@ -30,7 +30,7 @@ class RegisterIntro extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 32),
+                padding: const EdgeInsets.only(top: 24,bottom: 50),
                 child: ElevatedButton(
                   onPressed: () {
                     _showEmailBottunSheet(context, size, textTheme);
@@ -59,11 +59,9 @@ class RegisterIntro extends StatelessWidget {
       backgroundColor: Colors.transparent,
       builder: ((contex) {
         return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
+          padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Container(
-            height: size.height / 3,
+            height: size.height / 3 ,
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -81,7 +79,7 @@ class RegisterIntro extends StatelessWidget {
                     child: TextField(
                       onChanged: (value) {
                         isEmail(value);
-
+          
                         print(
                           value + " is Email : " + isEmail(value).toString(),
                         );

@@ -12,6 +12,8 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
+final GlobalKey<ScaffoldState> _key = GlobalKey();
+
 var selectedPageIndex = 0;
 
 class _MainScreenState extends State<MainScreen> {
@@ -23,13 +25,58 @@ class _MainScreenState extends State<MainScreen> {
 
     return SafeArea(
       child: Scaffold(
+        key: _key,
+        drawer: Drawer(
+          backgroundColor: SolidColors.scofoldBg,
+          child: Padding(
+            padding: EdgeInsets.only(right: bodymargin, left: bodymargin),
+            child: ListView(
+              children: [
+                DrawerHeader(
+                  child: Center(
+                    child: Image.asset("assets/images/Logo.png", scale: 3),
+                  ),
+                ),
+                ListTile(
+                  title: Text("پروفایل کاربری", style: textTheme.bodySmall),
+                  onTap: () {},
+                ),
+                const Divider(color: SolidColors.dividerColor),
+                ListTile(
+                  title: Text("درباره تک بلاگ", style: textTheme.bodySmall),
+                  onTap: () {},
+                ),
+                const Divider(color: SolidColors.dividerColor),
+                ListTile(
+                  title: Text(
+                    "اشتراک گذاری تک بلاگ",
+                    style: textTheme.bodySmall,
+                  ),
+                  onTap: () {},
+                ),
+                const Divider(color: SolidColors.dividerColor),
+                ListTile(
+                  title: Text("تک بلاگ در گیت هاب", style: textTheme.bodySmall),
+                  onTap: () {},
+                ),
+                const Divider(color: SolidColors.dividerColor),
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: SolidColors.scofoldBg,
           elevation: 0,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Icon(Icons.menu, color: Colors.black),
+              InkWell(
+                onTap: () {
+                  _key.currentState!.openDrawer();
+                },
+                child: Icon(Icons.menu, color: Colors.black),
+              ),
               Image.asset("assets/images/Logo.png", height: size.height / 16),
               Icon(Icons.search, color: Colors.black),
             ],
@@ -46,15 +93,14 @@ class _MainScreenState extends State<MainScreen> {
                     textTheme: textTheme,
                     bodymargin: bodymargin,
                   ),
-            
+
                   ProfileScreen(
                     size: size,
                     textTheme: textTheme,
                     bodymargin: bodymargin,
                   ),
-// یادت باشه که الکیه
+                  // یادت باشه که الکیه
                   RegisterIntro(),
-                  
                 ],
               ),
             ),
@@ -89,7 +135,7 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 5,
+      bottom: 8,
       right: 0,
       left: 0,
 
