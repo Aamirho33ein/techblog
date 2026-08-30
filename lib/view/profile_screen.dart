@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:tec/my_Component.dart';
-import 'package:tec/my_colors.dart';
-import 'package:tec/my_strings.dart';
+import 'package:tec/component/my_Component.dart';
+import 'package:tec/component/my_colors.dart';
+import 'package:tec/component/my_strings.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({
     super.key,
-    required this.size,
-    required this.textTheme,
-    required this.bodymargin,
+
   });
 
-  final Size size;
-  final TextTheme textTheme;
-  final double bodymargin;
+
 
   @override
   Widget build(BuildContext context) {
+
+        var textTheme = Theme.of(context).textTheme;
+    var size = MediaQuery.of(context).size;
+    double bodymargin = size.width / 10;
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
-        padding: const EdgeInsets.only(top: 35),
+        padding: const EdgeInsets.only(top: 90),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

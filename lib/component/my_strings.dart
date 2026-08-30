@@ -19,4 +19,12 @@ class MyStrings {
   static const String successfulRegistration =
       """تبریک میگم ، ایمیل با موفقیت تایید شد
 لطفا اطلاعات ثبت نام رو کامل کن""";
+
+
+  static const String share =
+      """من از تک بلاگ استفاده میکنم ، خیلی باحاله ، تو هم داشته باش\n
+      
+      www.sasansafari.com
+      
+      """;
 }

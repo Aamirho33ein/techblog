@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:tec/my_colors.dart';
+import 'package:get/get_utils/src/extensions/export.dart';
+import 'package:get/state_manager.dart';
+import 'package:tec/component/api_constant.dart';
+import 'package:tec/component/my_colors.dart';
+import 'package:tec/component/my_strings.dart';
+import 'package:tec/services/dio_services.dart';
 import 'package:tec/view/home_screnn.dart';
 import 'package:tec/view/my_cats.dart';
 import 'package:tec/view/profile_screen.dart';
 import 'package:tec/view/register_intro.dart';
 
-class MainScreen extends StatefulWidget {
+final GlobalKey<ScaffoldState> _key = GlobalKey();
+
+RxInt selectedPageIndex = 0.obs;
+
+class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-final GlobalKey<ScaffoldState> _key = GlobalKey();
-
-var selectedPageIndex = 0;
-
-class _MainScreenState extends State<MainScreen> {
-  @override
   Widget build(BuildContext context) {
+    DioServices().getMethod(ApiConstant.getHomeItems);
     var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
     double bodymargin = size.width / 10;
@@ -46,13 +47,14 @@ class _MainScreenState extends State<MainScreen> {
                   title: Text("درباره تک بلاگ", style: textTheme.bodySmall),
                   onTap: () {},
                 ),
-                const Divider(color:  Color.fromARGB(255, 188, 188, 188)),
+                const Divider(color: Color.fromARGB(255, 188, 188, 188)),
                 ListTile(
                   title: Text(
                     "اشتراک گذاری تک بلاگ",
                     style: textTheme.bodySmall,
                   ),
-                  onTap: () {},
+                  onTap: () async {
+                  },
                 ),
                 const Divider(color: Color.fromARGB(255, 188, 188, 188)),
                 ListTile(
@@ -85,32 +87,28 @@ class _MainScreenState extends State<MainScreen> {
         body: Stack(
           children: [
             Positioned.fill(
-              child: IndexedStack(
-                index: selectedPageIndex,
-                children: [
-                  HomeScreen(
-                    size: size,
-                    textTheme: textTheme,
-                    bodymargin: bodymargin,
-                  ),
+              child: Obx(
+                () => IndexedStack(
+                  index: selectedPageIndex.value,
+                  children: [
+                    HomeScreen(
+                      size: size,
+                      textTheme: textTheme,
+                      bodymargin: bodymargin,
+                    ),
 
-                  ProfileScreen(
-                    size: size,
-                    textTheme: textTheme,
-                    bodymargin: bodymargin,
-                  ),
-                  // یادت باشه که الکیه
-                  RegisterIntro(),
-                ],
+                    ProfileScreen(),
+                    // یادت باشه که الکیه
+                    RegisterIntro(),
+                  ],
+                ),
               ),
             ),
             BottomNavigation(
               size: size,
               bodymargin: bodymargin,
               changeScreen: (int value) {
-                setState(() {
-                  selectedPageIndex = value;
-                });
+                selectedPageIndex.value = value;
               },
             ),
           ],
