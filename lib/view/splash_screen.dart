@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Image.asset("assets/images/Logo.png", height: 64),
               SizedBox(height: 32),
-              SpinKitPouringHourGlassRefined(
+              SpinKitFadingCube(
                 color: SolidColors.primeryColor,
                 size: 32,
               ),

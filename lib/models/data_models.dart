@@ -27,14 +27,4 @@ class BlogModel {
   });
 }
 
-class BlogModelPodcast {
-  int id;
-  String imageUrl;
-  String title;
 
-  BlogModelPodcast({
-    required this.id,
-    required this.title,
-    required this.imageUrl,
-  });
-}
