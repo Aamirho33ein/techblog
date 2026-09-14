@@ -30,9 +30,7 @@ class HomeScreen extends StatelessWidget {
         height: size.height / 3.95,
         child: Obx(
           () => ListView.builder(
-            itemCount: homeScreenController.topVisitedList
-                .getRange(0, 5)
-                .length,
+            itemCount: homeScreenController.topVisitedList.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               // blog item
@@ -94,8 +92,9 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     homeScreenController
-                                        .topVisitedList[index]
-                                        .author!,
+                                            .topVisitedList[index]
+                                            .author ??
+                                        "بدون نویسنده",
                                     style: textTheme.titleLarge,
                                   ),
                                   Row(
@@ -209,124 +208,146 @@ class HomeScreen extends StatelessWidget {
       );
     }
 
-Widget poster() {
-  return Obx(
-    () => Stack(
-      children: [
-        Container(
-          width: size.width / 1.25,
-          height: size.height / 5,
-          foregroundDecoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-            gradient: LinearGradient(
-              colors: GradiantColors.homePosterCoverGradiant,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: CachedNetworkImage(
-            imageUrl: homeScreenController.poster.value.image!,
-            imageBuilder: (context, imageProvider) {
-              return Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(16),
-                  ),
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
+    Widget poster() {
+      return Obx(
+        () => Stack(
+          children: [
+            Container(
+              width: size.width / 1.25,
+              height: size.height / 5,
+              foregroundDecoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                gradient: LinearGradient(
+                  colors: GradiantColors.homePosterCoverGradiant,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                 ),
-              );
-            },
-            placeholder: (context, url) => Loading(),
-            errorWidget: (context, url, error) => const Icon(
-              Icons.image_not_supported_outlined,
-              size: 50,
-              color: Colors.grey,
+              ),
+              child: CachedNetworkImage(
+                imageUrl: homeScreenController.poster.value.image!,
+                imageBuilder: (context, imageProvider) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                },
+                placeholder: (context, url) => Loading(),
+                errorWidget: (context, url, error) => const Icon(
+                  Icons.image_not_supported_outlined,
+                  size: 50,
+                  color: Colors.grey,
+                ),
+              ),
             ),
-          ),
-        ),
-        Positioned(
-          bottom: 12,
-          left: 0,
-          right: 0,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+            Positioned(
+              bottom: 12,
+              left: 0,
+              right: 0,
+              child: Column(
                 children: [
-                  Text(
-                    homePagePosterMap["writer"] +
-                        // ignore: prefer_interpolation_to_compose_strings
-                        " - " +
-                        homePagePosterMap["date"],
-                    style: textTheme.titleLarge,
-                  ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        homePagePosterMap["view"],
+                        homePagePosterMap["writer"] +
+                            // ignore: prefer_interpolation_to_compose_strings
+                            " - " +
+                            homePagePosterMap["date"],
                         style: textTheme.titleLarge,
                       ),
-                      const SizedBox(width: 8),
-                      const Icon(
-                        Icons.remove_red_eye_sharp,
-                        color: Colors.white,
-                        size: 16,
+                      Row(
+                        children: [
+                          Text(
+                            homePagePosterMap["view"],
+                            style: textTheme.titleLarge,
+                          ),
+                          const SizedBox(width: 8),
+                          const Icon(
+                            Icons.remove_red_eye_sharp,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                        ],
                       ),
                     ],
                   ),
+                  const SizedBox(height: 8),
+                  Text(
+                    homeScreenController.poster.value.title!,
+                    style: textTheme.headlineLarge,
+                  ),
                 ],
               ),
-              const SizedBox(height: 8),
-              Text(
-                homeScreenController.poster.value.title!,
-                style: textTheme.headlineLarge,
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
-}
+      );
+    }
+
+    Widget tags() {
+      return SizedBox(
+        height: 60,
+        child: ListView.builder(
+          itemCount: tagList.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: ((context, index) {
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                0,
+                8,
+                index == 0 ? bodymargin : 15,
+                8,
+              ),
+              child: MainTags(textTheme: textTheme, index: index),
+            );
+          }),
+        ),
+      );
+    }
 
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Obx(
         () => Padding(
           padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-          child: homeScreenController.loading.value==false? Column(
-            children: [
-             poster(),
-        
-              const SizedBox(height: 16),
-        
-              HomePageTagList(bodymargin: bodymargin, textTheme: textTheme),
-        
-              const SizedBox(height: 32),
-        
-              SeeMoreBlog(bodymargin: bodymargin, textTheme: textTheme),
-        
-              topVisited(),
-        
-              const SizedBox(height: 40),
-        
-              SeeMorePodcast(bodymargin: bodymargin, textTheme: textTheme),
-        
-              topPodcasts(),
-        
-              SizedBox(height: size.height / 9),
-            ],
-          ): const Center(child: Loading())
+          child: homeScreenController.loading.value == false
+              ? Column(
+                  children: [
+                    poster(),
+
+                    const SizedBox(height: 16),
+
+                    tags(),
+
+                    const SizedBox(height: 32),
+
+                    SeeMoreBlog(bodymargin: bodymargin, textTheme: textTheme),
+
+                    topVisited(),
+
+                    const SizedBox(height: 40),
+
+                    SeeMorePodcast(
+                      bodymargin: bodymargin,
+                      textTheme: textTheme,
+                    ),
+
+                    topPodcasts(),
+
+                    SizedBox(height: size.height / 9),
+                  ],
+                )
+              : const Center(child: Loading()),
         ),
       ),
     );
   }
 }
-
-
 
 class SeeMorePodcast extends StatelessWidget {
   const SeeMorePodcast({
@@ -383,33 +404,3 @@ class SeeMoreBlog extends StatelessWidget {
     );
   }
 }
-
-class HomePageTagList extends StatelessWidget {
-  const HomePageTagList({
-    super.key,
-    required this.bodymargin,
-    required this.textTheme,
-  });
-
-  final double bodymargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      child: ListView.builder(
-        itemCount: tagList.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: ((context, index) {
-          return Padding(
-            padding: EdgeInsets.fromLTRB(0, 8, index == 0 ? bodymargin : 15, 8),
-            child: MainTags(textTheme: textTheme, index: index),
-          );
-        }),
-      ),
-    );
-  }
-}
-
-

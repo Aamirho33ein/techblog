@@ -95,7 +95,10 @@ class _MyCatsState extends State<MyCats> {
                                 }
                               });
                             }),
-                            child: MainTags(textTheme: textTheme, index: index),
+                            child: MainTags(
+                              textTheme: textTheme,
+                              index: index,
+                            ),
                           );
                         }),
                       ),

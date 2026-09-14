@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/route_manager.dart';
 import 'package:tec/component/my_colors.dart';
-import 'package:tec/view/main_screen.dart';
+import 'package:tec/view/articel_list_screen.dart';
+import 'package:tec/view/main_screen/home_screnn.dart';
+import 'package:tec/view/main_screen/main_screen.dart';
 import 'package:tec/view/my_cats.dart';
 import 'package:tec/view/register_intro.dart';
+import 'package:tec/view/single.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -24,13 +28,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    return MaterialApp(
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [Locale('fa')], // farsi
+    return GetMaterialApp(
+      locale: const Locale('fa'),
       theme: ThemeData(
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(16),
@@ -119,7 +118,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       // home: SplashScreen(),
-      home: MainScreen(),
+      home: ArticleListScreen(),
     );
   }
 }

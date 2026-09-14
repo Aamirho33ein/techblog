@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:get/state_manager.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tec/component/api_constant.dart';
 import 'package:tec/component/my_colors.dart';
 import 'package:tec/component/my_strings.dart';
 import 'package:tec/services/dio_services.dart';
-import 'package:tec/view/home_screnn.dart';
+import 'package:tec/view/main_screen/home_screnn.dart';
+import 'package:tec/view/main_screen/profile_screen.dart';
 import 'package:tec/view/my_cats.dart';
-import 'package:tec/view/profile_screen.dart';
 import 'package:tec/view/register_intro.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -19,7 +20,6 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
     double bodymargin = size.width / 10;
@@ -54,6 +54,11 @@ class MainScreen extends StatelessWidget {
                     style: textTheme.bodySmall,
                   ),
                   onTap: () async {
+                    SharePlus.instance.share(
+                      ShareParams(
+                        text: 'من تک بلاگ رو نصب کردم ، خیلی خفنه تو هم نصب کن',
+                      ),
+                    );
                   },
                 ),
                 const Divider(color: Color.fromARGB(255, 188, 188, 188)),
