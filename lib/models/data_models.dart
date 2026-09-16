@@ -3,6 +3,8 @@ class HasTagModel {
   String title;
 
   HasTagModel({required this.title});
+
+  get id => null;
 }
 
 class BlogModel {

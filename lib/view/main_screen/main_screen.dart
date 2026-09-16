@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/export.dart';
+import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tec/component/api_constant.dart';
@@ -9,7 +10,7 @@ import 'package:tec/services/dio_services.dart';
 import 'package:tec/view/main_screen/home_screnn.dart';
 import 'package:tec/view/main_screen/profile_screen.dart';
 import 'package:tec/view/my_cats.dart';
-import 'package:tec/view/register_intro.dart';
+import 'package:tec/view/register/register_intro.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -171,7 +172,10 @@ class BottomNavigation extends StatelessWidget {
                 ),
 
                 IconButton(
-                  onPressed: (() => changeScreen(2)),
+                  onPressed: () {
+                    // TODO Check login status
+                    Get.to(RegisterIntro());
+                  },
                   icon: ImageIcon(
                     AssetImage("assets/icons/par.png"),
                     color: Colors.white,

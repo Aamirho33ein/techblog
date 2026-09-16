@@ -7,8 +7,9 @@ import 'package:tec/view/articel_list_screen.dart';
 import 'package:tec/view/main_screen/home_screnn.dart';
 import 'package:tec/view/main_screen/main_screen.dart';
 import 'package:tec/view/my_cats.dart';
-import 'package:tec/view/register_intro.dart';
+import 'package:tec/view/register/register_intro.dart';
 import 'package:tec/view/single.dart';
+import 'package:tec/view/splash_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -118,7 +119,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       // home: SplashScreen(),
-      home: ArticleListScreen(),
+      home: SplashScreen(),
     );
   }
 }

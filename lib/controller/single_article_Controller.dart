@@ -21,7 +21,7 @@ class SingleArticleController extends GetxController {
     super.onInit();
   }
 
-  getArticleInfo() async {
+  getArticleInfo(var id) async {
     articleInfoModel = ArticleInfoModel().obs;
     loading.value = true;
     hasError.value = false;
@@ -29,8 +29,7 @@ class SingleArticleController extends GetxController {
 
     try {
       var response = await DioServices().getMethod(
-        "${ApiConstant.getArticleInfo}${id.value}&user_id=$userId",
-      );
+        "${ApiConstant.getArticleInfo}${id}&user_id=$userId",);
 
       if (response.statusCode == 200) {
         articleInfoModel.value = ArticleInfoModel.fromjson(response.data);
@@ -43,6 +42,7 @@ class SingleArticleController extends GetxController {
         relatedList.clear();
         response.data['related'].forEach((element) {
           relatedList.add(ArticleModel.fromjson(element));
+          
         });
       } else {
         hasError.value = true;
@@ -52,6 +52,6 @@ class SingleArticleController extends GetxController {
     } finally {
       loading.value = false;
     }
-    Get.to(Single());
+    
   }
 }

@@ -100,9 +100,14 @@ PreferredSize appbar(String title) {
               color: SolidColors.primeryColor,
               shape: BoxShape.circle,
             ),
-            child: Icon(
-              Icons.keyboard_arrow_right_rounded,
-              color: Colors.white,
+            child: InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: Icon(
+                Icons.keyboard_arrow_right_rounded,
+                color: Colors.white,
+              ),
             ),
           ),
         ),
@@ -112,7 +117,11 @@ PreferredSize appbar(String title) {
 }
 
 class singlePageTags extends StatelessWidget {
-  const singlePageTags({super.key, required this.textTheme, required this.index});
+  const singlePageTags({
+    super.key,
+    required this.textTheme,
+    required this.index,
+  });
 
   final TextTheme textTheme;
   final int index;
@@ -128,7 +137,6 @@ class singlePageTags extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
         child: Row(
           children: [
-            
             // tag list
             SizedBox(width: 8),
             Text(

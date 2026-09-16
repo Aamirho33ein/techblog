@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tec/component/my_Component.dart';
 import 'package:tec/component/my_colors.dart';
 import 'package:tec/component/my_strings.dart';
@@ -15,24 +16,13 @@ import 'package:tec/controller/home_screen_controller.dart';
 import 'package:tec/controller/list_article_Controller.dart';
 import 'package:tec/controller/single_article_Controller.dart';
 import 'package:tec/models/fake_data.dart';
+import 'package:tec/models/fake_data.dart' as singleArticleController;
+import 'package:tec/view/articel_list_screen.dart';
 
-class Single extends StatefulWidget {
-  const Single({super.key});
-
-  @override
-  State<Single> createState() => _SingleState();
-}
-
-class _SingleState extends State<Single> {
+class Single extends StatelessWidget {
   SingleArticleController singlearticleController = Get.put(
     SingleArticleController(),
   );
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    singlearticleController.getArticleInfo();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,10 +96,18 @@ class _SingleState extends State<Single> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     SizedBox(width: 20),
-                                    const Icon(
-                                      Icons.arrow_back,
-                                      color: Colors.white,
-                                      size: 24,
+                                    InkWell(
+                                      onTap: () {},
+                                      child: InkWell(
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                        child: Icon(
+                                          Icons.arrow_back,
+                                          color: Colors.white,
+                                          size: 24,
+                                        ),
+                                      ),
                                     ),
                                     Expanded(child: SizedBox()),
                                     const Icon(
@@ -118,10 +116,20 @@ class _SingleState extends State<Single> {
                                       size: 24,
                                     ),
                                     SizedBox(width: 20),
-                                    const Icon(
-                                      Icons.share,
-                                      color: Colors.white,
-                                      size: 24,
+                                    InkWell(
+                                      onTap: () {
+                                        SharePlus.instance.share(
+                                          ShareParams(
+                                            text:
+                                                'من تک بلاگ رو نصب کردم ، خیلی خفنه تو هم نصب کن',
+                                          ),
+                                        );
+                                      },
+                                      child: Icon(
+                                        Icons.share,
+                                        color: Colors.white,
+                                        size: 24,
+                                      ),
                                     ),
                                     SizedBox(width: 20),
                                   ],
@@ -184,28 +192,31 @@ class _SingleState extends State<Single> {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: ((context, index) {
                             return GestureDetector(
-                              onTap: () {
-                                
-                                  singlearticleController.id.value = int.parse(
-                                    singlearticleController
-                                        .tagList[index]
-                                        .id!,
-                                  );
-                                
+                              onTap: () async {
+                                var tagId =
+                                    singlearticleController.tagList[index].id!;
+                                await Get.find<ListArticleController>()
+                                    .getArticleListWhithTagId(tagId);
+
+                                String tagName = singlearticleController
+                                    .tagList[index]
+                                    .title!;
+                                Get.to(ArticleListScreen());
                               },
                               child: Padding(
                                 padding: EdgeInsets.fromLTRB(
-                0,
-                8,
-                index == 0 ? bodymargin : 15,
-                8,
-              ),
-                                child: singlePageTags(textTheme: texttheme, index: index),
+                                  0,
+                                  8,
+                                  index == 0 ? bodymargin : 15,
+                                  8,
+                                ),
+                                child: singlePageTags(
+                                  textTheme: texttheme,
+                                  index: index,
+                                ),
                               ),
                             );
-                            
                           }),
-                          
                         ),
                       ),
 
@@ -238,11 +249,12 @@ class _SingleState extends State<Single> {
                               // blog item
                               return GestureDetector(
                                 onTap: () {
-                                  singlearticleController.id.value = int.parse(
+                                  singlearticleController.getArticleInfo(
                                     singlearticleController
                                         .relatedList[index]
-                                        .id!,
+                                        .id,
                                   );
+                                  Get.to(Single());
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.only(

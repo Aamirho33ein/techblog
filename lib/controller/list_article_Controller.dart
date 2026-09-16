@@ -31,4 +31,27 @@ class ListArticleController extends GetxController {
       loading.value = false;
     }
   }
+
+  getArticleListWhithTagId(String id) async {
+    articleList.clear();
+    loading.value = true;
+
+    // final queryParam = {
+    //   'command': 'get_articles_with_tag_id',
+    //   'tag_id': id,
+    //   'user_id': '',
+    // };
+    final uri = 'https://techblog.sasansafari.com/Techblog/api/article/get.php'
+      '?command=get_articles_with_tag_id'
+      '&tag_id=$id'
+      '&user_id=';
+    var response = await DioServices().getMethod(uri.toString());
+
+    if (response.statusCode == 200) {
+      response.data.forEach((element) {
+        articleList.add(ArticleModel.fromjson(element));
+      });
+      loading.value = false;
+    }
+  }
 }

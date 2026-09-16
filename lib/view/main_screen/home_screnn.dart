@@ -5,10 +5,15 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:tec/controller/home_screen_controller.dart';
+import 'package:tec/controller/list_article_Controller.dart';
+import 'package:tec/controller/single_article_Controller.dart';
 import 'package:tec/models/fake_data.dart';
 import 'package:tec/component/my_Component.dart';
 import 'package:tec/component/my_colors.dart';
 import 'package:tec/component/my_strings.dart';
+import 'package:tec/models/fake_data.dart' as singlearticleController;
+import 'package:tec/view/articel_list_screen.dart';
+import 'package:tec/view/single.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({
@@ -19,6 +24,9 @@ class HomeScreen extends StatelessWidget {
   });
 
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
+  SingleArticleController singleArticleController = Get.put(
+    SingleArticleController(),
+  );
   final Size size;
   final TextTheme textTheme;
   final double bodymargin;
@@ -34,105 +42,114 @@ class HomeScreen extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               // blog item
-              return Padding(
-                padding: EdgeInsets.only(right: index == 0 ? bodymargin : 15),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        height: size.height / 5.3,
-                        width: size.width / 2.4,
-                        child: Stack(
-                          children: [
-                            CachedNetworkImage(
-                              imageUrl: homeScreenController
-                                  .topVisitedList[index]
-                                  .image!,
-                              imageBuilder: (context, imageProvider) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(16),
-                                    ),
-                                    image: DecorationImage(
-                                      image: imageProvider,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  foregroundDecoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(16),
-                                    ),
-                                    gradient: LinearGradient(
-                                      colors: GradiantColors.blogpost,
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                    ),
-                                  ),
-                                );
-                              },
-                              placeholder: (context, url) => SpinKitFadingCube(
-                                color: SolidColors.primeryColor,
-                                size: 32,
-                              ),
-                              errorWidget: (context, url, error) => Icon(
-                                Icons.image_not_supported_outlined,
-                                size: 50,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 8,
-                              left: 0,
-                              right: 0,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    homeScreenController
-                                            .topVisitedList[index]
-                                            .author ??
-                                        "بدون نویسنده",
-                                    style: textTheme.titleLarge,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        homeScreenController
-                                            .topVisitedList[index]
-                                            .view!,
-                                        style: textTheme.titleLarge,
+              return GestureDetector(
+                onTap: () {
+                  singleArticleController.getArticleInfo(
+                    homeScreenController.topVisitedList[index].id,
+                  );
+                  Get.to(Single());
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(right: index == 0 ? bodymargin : 15),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: size.height / 5.5,
+                          width: size.width / 2.2,
+                          child: Stack(
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl: homeScreenController
+                                    .topVisitedList[index]
+                                    .image!,
+                                imageBuilder: (context, imageProvider) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(16),
                                       ),
-                                      const SizedBox(width: 8),
-                                      const Icon(
-                                        Icons.remove_red_eye_sharp,
-                                        color: Colors.white,
-                                        size: 16,
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover,
                                       ),
-                                    ],
-                                  ),
-                                ],
+                                    ),
+                                    foregroundDecoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(16),
+                                      ),
+                                      gradient: LinearGradient(
+                                        colors: GradiantColors.blogpost,
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                placeholder: (context, url) =>
+                                    SpinKitFadingCube(
+                                      color: SolidColors.primeryColor,
+                                      size: 32,
+                                    ),
+                                errorWidget: (context, url, error) => Icon(
+                                  Icons.image_not_supported_outlined,
+                                  size: 50,
+                                  color: Colors.grey,
+                                ),
                               ),
-                            ),
-                          ],
+                              Positioned(
+                                bottom: 8,
+                                left: 0,
+                                right: 0,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      homeScreenController
+                                              .topVisitedList[index]
+                                              .author ??
+                                          "بدون نویسنده",
+                                      style: textTheme.titleLarge,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          homeScreenController
+                                              .topVisitedList[index]
+                                              .view!,
+                                          style: textTheme.titleLarge,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        const Icon(
+                                          Icons.remove_red_eye_sharp,
+                                          color: Colors.white,
+                                          size: 16,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: size.width / 2.5,
-                      child: Text(
-                        homeScreenController.topVisitedList[index].title!,
-                        style: TextStyle(
-                          color: SolidColors.textTitle,
-                          fontWeight: FontWeight.normal,
+                      SizedBox(
+                        width: size.width / 2.5,
+                        child: Text(
+                          homeScreenController.topVisitedList[index].title!,
+                          style: TextStyle(
+                            color: SolidColors.textTitle,
+                            fontWeight: FontWeight.normal,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                         ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },
@@ -157,8 +174,8 @@ class HomeScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
-                        height: size.height / 5.3,
-                        width: size.width / 2.4,
+                        height: size.height / 5.5,
+                        width: size.width / 2.2,
                         child: CachedNetworkImage(
                           imageUrl:
                               homeScreenController.topPodcasts[index].poster!,
@@ -247,35 +264,10 @@ class HomeScreen extends StatelessWidget {
             Positioned(
               bottom: 12,
               left: 0,
-              right: 0,
+              right: 19,
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        homePagePosterMap["writer"] +
-                            // ignore: prefer_interpolation_to_compose_strings
-                            " - " +
-                            homePagePosterMap["date"],
-                        style: textTheme.titleLarge,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            homePagePosterMap["view"],
-                            style: textTheme.titleLarge,
-                          ),
-                          const SizedBox(width: 8),
-                          const Icon(
-                            Icons.remove_red_eye_sharp,
-                            color: Colors.white,
-                            size: 16,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceAround),
                   const SizedBox(height: 8),
                   Text(
                     homeScreenController.poster.value.title!,
@@ -296,14 +288,27 @@ class HomeScreen extends StatelessWidget {
           itemCount: tagList.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: ((context, index) {
-            return Padding(
-              padding: EdgeInsets.fromLTRB(
-                0,
-                8,
-                index == 0 ? bodymargin : 15,
-                8,
+            return GestureDetector(
+              onTap: () async {
+                                var tagId =
+                                    singlearticleController.tagList[index].id!;
+                                await Get.find<ListArticleController>()
+                                    .getArticleListWhithTagId(tagId);
+
+                                String tagName = singlearticleController
+                                    .tagList[index]
+                                    .title!;
+                                Get.to(ArticleListScreen());
+                              },
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(
+                  0,
+                  8,
+                  index == 0 ? bodymargin : 15,
+                  8,
+                ),
+                child: MainTags(textTheme: textTheme, index: index),
               ),
-              child: MainTags(textTheme: textTheme, index: index),
             );
           }),
         ),
@@ -326,7 +331,15 @@ class HomeScreen extends StatelessWidget {
 
                     const SizedBox(height: 32),
 
-                    SeeMoreBlog(bodymargin: bodymargin, textTheme: textTheme),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(ArticleListScreen());
+                      },
+                      child: SeeMoreBlog(
+                        bodymargin: bodymargin,
+                        textTheme: textTheme,
+                      ),
+                    ),
 
                     topVisited(),
 
