@@ -11,6 +11,8 @@ import 'package:tec/controller/single_article_Controller.dart';
 import 'package:tec/view/single.dart';
 
 class ArticleListScreen extends StatelessWidget {
+  ArticleListScreen({super.key, this.title = "مقالات جدید"});
+  final String title;
   ListArticleController listArticleController = Get.put(
     ListArticleController(),
   );
@@ -23,7 +25,7 @@ class ArticleListScreen extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        appBar: appbar("مقالات جدید"),
+        appBar: appbar(title),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(

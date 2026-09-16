@@ -11,9 +11,9 @@ import 'package:tec/models/fake_data.dart';
 import 'package:tec/component/my_Component.dart';
 import 'package:tec/component/my_colors.dart';
 import 'package:tec/component/my_strings.dart';
-import 'package:tec/models/fake_data.dart' as singlearticleController;
 import 'package:tec/view/articel_list_screen.dart';
 import 'package:tec/view/single.dart';
+import 'package:validators/sanitizers.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({
@@ -26,6 +26,9 @@ class HomeScreen extends StatelessWidget {
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
   SingleArticleController singleArticleController = Get.put(
     SingleArticleController(),
+  );
+  ListArticleController listArticleController = Get.put(
+    ListArticleController(),
   );
   final Size size;
   final TextTheme textTheme;
@@ -285,21 +288,18 @@ class HomeScreen extends StatelessWidget {
       return SizedBox(
         height: 60,
         child: ListView.builder(
-          itemCount: tagList.length,
+          itemCount: homeScreenController.tagsList.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: ((context, index) {
             return GestureDetector(
               onTap: () async {
-                                var tagId =
-                                    singlearticleController.tagList[index].id!;
-                                await Get.find<ListArticleController>()
-                                    .getArticleListWhithTagId(tagId);
-
-                                String tagName = singlearticleController
-                                    .tagList[index]
-                                    .title!;
-                                Get.to(ArticleListScreen());
-                              },
+                await Get.find<ListArticleController>()
+                    .getArticleListWhithTagId(
+                      homeScreenController.tagsList[index].id!,
+                    );
+                    String tagName = homeScreenController.tagsList[index].title!;
+                Get.to(ArticleListScreen(title: tagName,));
+              },
               child: Padding(
                 padding: EdgeInsets.fromLTRB(
                   0,

@@ -9,6 +9,7 @@ import 'package:tec/controller/home_screen_controller.dart';
 import 'package:tec/controller/single_article_Controller.dart';
 import 'package:tec/models/fake_data.dart';
 import 'package:tec/component/my_colors.dart';
+import 'package:tec/models/tags_model.dart';
 
 class TechDivider extends StatelessWidget {
   const TechDivider({super.key, required this.size});
@@ -30,10 +31,16 @@ class TechDivider extends StatelessWidget {
 }
 
 class MainTags extends StatelessWidget {
-  const MainTags({super.key, required this.textTheme, required this.index});
+  const MainTags({
+    super.key,
+    required this.textTheme,
+    required this.index,
+
+  });
 
   final TextTheme textTheme;
   final int index;
+
   @override
   Widget build(BuildContext context) {
     return Container(
