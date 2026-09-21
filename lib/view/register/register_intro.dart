@@ -167,9 +167,8 @@ class RegisterIntro extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: (() {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (contex) => MyCats()),
-                      );
+                      registerController.verify();
+                      
                     }),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,

@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/route_manager.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:tec/component/my_colors.dart';
+
 import 'package:tec/view/articel_list_screen.dart';
 import 'package:tec/view/main_screen/home_screnn.dart';
 import 'package:tec/view/main_screen/main_screen.dart';
@@ -11,7 +15,7 @@ import 'package:tec/view/register/register_intro.dart';
 import 'package:tec/view/single.dart';
 import 'package:tec/view/splash_screen.dart';
 
-void main() {
+void main() async {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: SolidColors.statusBarColor,
@@ -20,6 +24,8 @@ void main() {
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
   );
+  await GetStorage.init();
+
   runApp(MyApp());
 }
 
@@ -33,43 +39,40 @@ class MyApp extends StatelessWidget {
       locale: const Locale('fa'),
       theme: ThemeData(
         inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(
-            width: 2,
-          )
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(width: 2),
           ),
-
         ),
 
         elevatedButtonTheme: ElevatedButtonThemeData(
-          
-          
           style: ButtonStyle(
-            
-                    // ignore: non_constant_identifier_names
-                    textStyle: WidgetStateProperty.resolveWith((States) {
-                      if (States.contains(WidgetState.pressed)) {
-                        return TextStyle(            fontFamily: 'vanil',
-            fontSize: 17,
-            fontWeight: FontWeight.w700,
-            color: Color.fromARGB(255, 255, 255, 255));
-                      }
-                      return TextStyle(            fontFamily: 'vanil',
-            fontSize: 15,
-            fontWeight: FontWeight.w300,
-            color: Color.fromARGB(200, 255, 255, 255));
-                    }),
+            // ignore: non_constant_identifier_names
+            textStyle: WidgetStateProperty.resolveWith((States) {
+              if (States.contains(WidgetState.pressed)) {
+                return TextStyle(
+                  fontFamily: 'vanil',
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                );
+              }
+              return TextStyle(
+                fontFamily: 'vanil',
+                fontSize: 15,
+                fontWeight: FontWeight.w300,
+                color: Color.fromARGB(200, 255, 255, 255),
+              );
+            }),
 
-                    backgroundColor: WidgetStateProperty.resolveWith((states) {
-                      if (states.contains(WidgetState.pressed)) {
-                        return Color.fromARGB(255, 40, 107, 184);
-                      }
-                      return Color.fromARGB(255, 68, 4, 87);
-                    }),
-                  ),
+            backgroundColor: WidgetStateProperty.resolveWith((states) {
+              if (states.contains(WidgetState.pressed)) {
+                return Color.fromARGB(255, 40, 107, 184);
+              }
+              return Color.fromARGB(255, 68, 4, 87);
+            }),
+          ),
         ),
-
-
 
         fontFamily: 'vanil',
 
@@ -114,7 +117,7 @@ class MyApp extends StatelessWidget {
             fontSize: 15,
             color: Color.fromARGB(255, 154, 154, 154),
             fontWeight: FontWeight.w700,
-          )
+          ),
         ),
       ),
       debugShowCheckedModeBanner: false,

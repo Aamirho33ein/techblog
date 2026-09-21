@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
@@ -6,6 +7,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:tec/component/api_constant.dart';
 import 'package:tec/component/my_colors.dart';
 import 'package:tec/component/my_strings.dart';
+import 'package:tec/controller/register_controller.dart';
 import 'package:tec/services/dio_services.dart';
 import 'package:tec/view/main_screen/home_screnn.dart';
 import 'package:tec/view/main_screen/profile_screen.dart';
@@ -17,7 +19,7 @@ final GlobalKey<ScaffoldState> _key = GlobalKey();
 RxInt selectedPageIndex = 0.obs;
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+  MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +127,7 @@ class MainScreen extends StatelessWidget {
 }
 
 class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({
+   BottomNavigation({
     super.key,
     required this.size,
     required this.bodymargin,
@@ -135,7 +137,10 @@ class BottomNavigation extends StatelessWidget {
   final Size size;
   final double bodymargin;
   final Function(int) changeScreen;
-
+  RegisterController _registerController = Get.put(
+    RegisterController(),
+    permanent: false,
+  );
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -173,8 +178,7 @@ class BottomNavigation extends StatelessWidget {
 
                 IconButton(
                   onPressed: () {
-                    // TODO Check login status
-                    Get.to(RegisterIntro());
+                    _registerController.toggleLogin();
                   },
                   icon: ImageIcon(
                     AssetImage("assets/icons/par.png"),
