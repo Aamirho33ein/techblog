@@ -8,6 +8,7 @@ import 'package:tec/component/my_colors.dart';
 import 'package:tec/component/text_style.dart';
 import 'package:tec/controller/list_article_Controller.dart';
 import 'package:tec/controller/single_article_Controller.dart';
+import 'package:tec/main.dart';
 import 'package:tec/view/single.dart';
 
 class ArticleListScreen extends StatelessWidget {
@@ -39,7 +40,7 @@ class ArticleListScreen extends StatelessWidget {
                       singlearticleController.getArticleInfo(
                         listArticleController.articleList[index].id,
                       );
-                      Get.to(Single());
+                      Get.toNamed(RoutSingleArticle);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

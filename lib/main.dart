@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:tec/binding.dart';
 import 'package:tec/component/my_colors.dart';
 
 import 'package:tec/view/articel_list_screen.dart';
@@ -37,92 +38,112 @@ class MyApp extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     return GetMaterialApp(
       locale: const Locale('fa'),
-      theme: ThemeData(
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(width: 2),
-          ),
-        ),
-
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            // ignore: non_constant_identifier_names
-            textStyle: WidgetStateProperty.resolveWith((States) {
-              if (States.contains(WidgetState.pressed)) {
-                return TextStyle(
-                  fontFamily: 'vanil',
-                  fontSize: 17,
-                  fontWeight: FontWeight.w700,
-                  color: Color.fromARGB(255, 255, 255, 255),
-                );
-              }
-              return TextStyle(
-                fontFamily: 'vanil',
-                fontSize: 15,
-                fontWeight: FontWeight.w300,
-                color: Color.fromARGB(200, 255, 255, 255),
-              );
-            }),
-
-            backgroundColor: WidgetStateProperty.resolveWith((states) {
-              if (states.contains(WidgetState.pressed)) {
-                return Color.fromARGB(255, 40, 107, 184);
-              }
-              return Color.fromARGB(255, 68, 4, 87);
-            }),
-          ),
-        ),
-
-        fontFamily: 'vanil',
-
-        textTheme: const TextTheme(
-          headlineLarge: TextStyle(
-            fontFamily: 'vanil',
-            fontSize: 17,
-            fontWeight: FontWeight.w700,
-            color: SolidColors.posterTitle,
-          ),
-          titleLarge: TextStyle(
-            fontFamily: 'vanil',
-            fontSize: 15,
-            fontWeight: FontWeight.w300,
-            color: SolidColors.posterSubTitle,
-          ),
-          bodyLarge: TextStyle(
-            fontFamily: 'vanil',
-            fontSize: 13,
-            fontWeight: FontWeight.w300,
-          ),
-          headlineMedium: TextStyle(
-            fontFamily: 'vanil',
-            fontSize: 15,
-            fontWeight: FontWeight.w300,
-            color: Colors.white,
-          ),
-          headlineSmall: TextStyle(
-            fontFamily: 'vanil',
-            fontSize: 15,
-            color: SolidColors.seeMore,
-            fontWeight: FontWeight.w700,
-          ),
-          bodySmall: TextStyle(
-            fontFamily: 'vanil',
-            fontSize: 15,
-            color: Color.fromARGB(255, 70, 70, 70),
-            fontWeight: FontWeight.w700,
-          ),
-          bodyMedium: TextStyle(
-            fontFamily: "vanil",
-            fontSize: 15,
-            color: Color.fromARGB(255, 154, 154, 154),
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
+      theme: lighttheme(),
       debugShowCheckedModeBanner: false,
-      // home: SplashScreen(),
+      getPages: [
+        GetPage(
+          name: RoutMainScrenn,
+          page: () => MainScreen(),
+          binding: RegisterBinding(),
+        ),
+
+        GetPage(
+          name: RoutSingleArticle,
+          page: () => Single(),
+          binding: ArticleBinding(),
+        ),
+      ],
+
       home: SplashScreen(),
     );
   }
+
+  ThemeData lighttheme() {
+    return ThemeData(
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(width: 2),
+        ),
+      ),
+
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          // ignore: non_constant_identifier_names
+          textStyle: WidgetStateProperty.resolveWith((States) {
+            if (States.contains(WidgetState.pressed)) {
+              return TextStyle(
+                fontFamily: 'vanil',
+                fontSize: 17,
+                fontWeight: FontWeight.w700,
+                color: Color.fromARGB(255, 255, 255, 255),
+              );
+            }
+            return TextStyle(
+              fontFamily: 'vanil',
+              fontSize: 15,
+              fontWeight: FontWeight.w300,
+              color: Color.fromARGB(200, 255, 255, 255),
+            );
+          }),
+
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.pressed)) {
+              return Color.fromARGB(255, 40, 107, 184);
+            }
+            return Color.fromARGB(255, 68, 4, 87);
+          }),
+        ),
+      ),
+
+      fontFamily: 'vanil',
+
+      textTheme: const TextTheme(
+        headlineLarge: TextStyle(
+          fontFamily: 'vanil',
+          fontSize: 17,
+          fontWeight: FontWeight.w700,
+          color: SolidColors.posterTitle,
+        ),
+        titleLarge: TextStyle(
+          fontFamily: 'vanil',
+          fontSize: 15,
+          fontWeight: FontWeight.w300,
+          color: SolidColors.posterSubTitle,
+        ),
+        bodyLarge: TextStyle(
+          fontFamily: 'vanil',
+          fontSize: 13,
+          fontWeight: FontWeight.w300,
+        ),
+        headlineMedium: TextStyle(
+          fontFamily: 'vanil',
+          fontSize: 15,
+          fontWeight: FontWeight.w300,
+          color: Colors.white,
+        ),
+        headlineSmall: TextStyle(
+          fontFamily: 'vanil',
+          fontSize: 15,
+          color: SolidColors.seeMore,
+          fontWeight: FontWeight.w700,
+        ),
+        bodySmall: TextStyle(
+          fontFamily: 'vanil',
+          fontSize: 15,
+          color: Color.fromARGB(255, 70, 70, 70),
+          fontWeight: FontWeight.w700,
+        ),
+        bodyMedium: TextStyle(
+          fontFamily: "vanil",
+          fontSize: 15,
+          color: Color.fromARGB(255, 154, 154, 154),
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+  }
 }
+
+const String RoutMainScrenn = "/MainScreen";
+const String RoutSingleArticle = "/SingleArticle";

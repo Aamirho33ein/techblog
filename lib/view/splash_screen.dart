@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:tec/component/my_colors.dart';
+import 'package:tec/main.dart';
 import 'package:tec/view/main_screen/main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,10 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 3)).then((value) {
-      Navigator.of(
-        // ignore: use_build_context_synchronously
-        context,
-      ).pushReplacement(MaterialPageRoute(builder: (context) => MainScreen()));
+      Get.offAllNamed(RoutMainScrenn);
     });
 
     super.initState();
@@ -33,10 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Image.asset("assets/images/Logo.png", height: 64),
               SizedBox(height: 32),
-              SpinKitFadingCube(
-                color: SolidColors.primeryColor,
-                size: 32,
-              ),
+              SpinKitFadingCube(color: SolidColors.primeryColor, size: 32),
             ],
           ),
         ),

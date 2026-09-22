@@ -20,19 +20,13 @@ import 'package:tec/models/fake_data.dart' as singleArticleController;
 import 'package:tec/view/articel_list_screen.dart';
 
 class Single extends StatelessWidget {
-  SingleArticleController singlearticleController = Get.put(
-    SingleArticleController(),
-  );
-
   @override
   Widget build(BuildContext context) {
     HomeScreenController homeScreenController = Get.put(HomeScreenController());
     ListArticleController listArticleController = Get.put(
       ListArticleController(),
     );
-    SingleArticleController singlearticleController = Get.put(
-      SingleArticleController(),
-    );
+    var singlearticleController = Get.find<SingleArticleController>();
     var size = MediaQuery.of(context).size;
 
     double bodymargin = size.width / 10;
