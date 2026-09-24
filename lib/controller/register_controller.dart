@@ -5,6 +5,7 @@ import 'package:get/state_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tec/component/api_constant.dart';
 import 'package:tec/component/storage_const.dart';
+import 'package:tec/main.dart';
 import 'package:tec/services/dio_services.dart';
 import 'package:tec/view/main_screen/main_screen.dart';
 import 'package:tec/view/register/register_intro.dart';
@@ -12,7 +13,7 @@ import 'package:tec/view/register/register_intro.dart';
 class RegisterController extends GetxController {
   TextEditingController emaileditingController = TextEditingController();
   TextEditingController activecodeeditingController = TextEditingController();
- 
+
   var email = '';
   var userId = '';
 
@@ -44,14 +45,14 @@ class RegisterController extends GetxController {
       case 'verified':
         var box = GetStorage();
 
-        box.write(token, response.data['token']);
+        box.write(StorageConst.token, response.data['token']);
 
-        box.write(userId, response.data['user_id']);
+        box.write(StorageConst.userId, response.data['user_id']);
 
         // ignore: prefer_interpolation_to_compose_strings
-        debugPrint("read ::: " + box.read(token));
+        debugPrint("read ::: " + box.read(StorageConst.token));
         // ignore: prefer_interpolation_to_compose_strings
-        debugPrint("read ::: " + box.read(userId));
+        debugPrint("read ::: " + box.read(StorageConst.userId));
 
         Get.offAll(MainScreen());
 
@@ -68,7 +69,7 @@ class RegisterController extends GetxController {
   }
 
   toggleLogin() {
-    if (GetStorage().read(token) == null) {
+    if (GetStorage().read(StorageConst.token) == null) {
       Get.to(RegisterIntro());
     } else {
       routToWriteBottomSheet();
@@ -94,68 +95,84 @@ class RegisterController extends GetxController {
                 children: [
                   SvgPicture.asset("assets/images/techbot.svg", height: 40),
                   SizedBox(width: 10),
-                  const Text("دونسته هات رو با بقیه به اشتراک بذار ...",style: TextStyle(
-                    
-          fontFamily: 'vanil',
-          fontSize: 15,
-          color: Color.fromARGB(255, 70, 70, 70),
-          fontWeight: FontWeight.w700,
-        
-                  ),),
+                  const Text(
+                    "دونسته هات رو با بقیه به اشتراک بذار ...",
+                    style: TextStyle(
+                      fontFamily: 'vanil',
+                      fontSize: 15,
+                      color: Color.fromARGB(255, 70, 70, 70),
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 30),
-              Text("""
+              Text(
+                """
 فکر کن !!  اینجا بودنت به این معناست که یک گیک تکنولوژی هستی
 دونسته هات رو با  جامعه‌ی گیک های فارسی زبان به اشتراک بذار..
-""",style: TextStyle(
-                    
-          fontFamily: 'vanil',
-          fontSize: 14,
-          color: Color.fromARGB(255, 107, 107, 107),
-          fontWeight: FontWeight.w700,
-        
-                  ),),
-                  SizedBox(height:50,),
+""",
+                style: TextStyle(
+                  fontFamily: 'vanil',
+                  fontSize: 14,
+                  color: Color.fromARGB(255, 107, 107, 107),
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              SizedBox(height: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GestureDetector(
                     onTap: () {
-                      debugPrint("write article");
+                      Get.toNamed(NamedRout.manageArticle);
                     },
-                    child: Row(
-                      children: [
-                        Image.asset("assets/icons/sendArticle.png", height: 32),
-                        SizedBox(width: 8,),
-                        Text("مدیریت مقاله ها",style: TextStyle(
-                    
-          fontFamily: 'vanil',
-          fontSize: 15,
-          color: Color.fromARGB(255, 70, 70, 70),
-          fontWeight: FontWeight.w700,
-        
-                  ),),
-                      ],
+                    child: Container(
+                      color: Colors.white,
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "assets/icons/sendArticle.png",
+                            height: 32,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            "مدیریت مقاله ها",
+                            style: TextStyle(
+                              fontFamily: 'vanil',
+                              fontSize: 15,
+                              color: Color.fromARGB(255, 70, 70, 70),
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   GestureDetector(
                     onTap: () {
                       debugPrint("write podcast");
                     },
-                    child: Row(
-                      children: [
-                        Image.asset("assets/icons/sendPodcast.png", height: 32),
-                        SizedBox(width: 8,),
-                        Text("مدیریت پادکست ها",style: TextStyle(
-                    
-          fontFamily: 'vanil',
-          fontSize: 15,
-          color: Color.fromARGB(255, 70, 70, 70),
-          fontWeight: FontWeight.w700,
-        
-                  ),),
-                      ],
+                    child: Container(
+                      color: Colors.white,
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "assets/icons/sendPodcast.png",
+                            height: 32,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            "مدیریت پادکست ها",
+                            style: TextStyle(
+                              fontFamily: 'vanil',
+                              fontSize: 15,
+                              color: Color.fromARGB(255, 70, 70, 70),
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

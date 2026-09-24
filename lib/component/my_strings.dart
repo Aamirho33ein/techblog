@@ -27,4 +27,9 @@ class MyStrings {
       www.sasansafari.com
       
       """;
+
+        static const String articleEmty = """
+    هنوز هیچ مقاله ای به جامعه گیک های فارسی 
+اضافه نکردی !!!
+""";
 }

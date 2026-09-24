@@ -7,4 +7,5 @@ class ApiConstant {
   static const getArticleInfo = baseUrl + "article/get.php?command=info&id=";
   static const postRegiset = baseUrl + "/register/action.php";
   static const basePath = '/Techblog/api/';
+  static const publishByMe = 'https://techblog.sasansafari.com/Techblog/api/article/get.php?command=published_by_me&user_id=';
 }

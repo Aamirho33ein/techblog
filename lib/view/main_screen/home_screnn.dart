@@ -5,14 +5,14 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:tec/controller/home_screen_controller.dart';
-import 'package:tec/controller/list_article_Controller.dart';
-import 'package:tec/controller/single_article_Controller.dart';
+import 'package:tec/controller/articles/list_article_Controller.dart';
+import 'package:tec/controller/articles/single_article_Controller.dart';
 import 'package:tec/models/fake_data.dart';
 import 'package:tec/component/my_Component.dart';
 import 'package:tec/component/my_colors.dart';
 import 'package:tec/component/my_strings.dart';
-import 'package:tec/view/articel_list_screen.dart';
-import 'package:tec/view/single.dart';
+import 'package:tec/view/articles/articel_list_screen.dart';
+import 'package:tec/view/articles/single.dart';
 import 'package:validators/sanitizers.dart';
 
 class HomeScreen extends StatelessWidget {

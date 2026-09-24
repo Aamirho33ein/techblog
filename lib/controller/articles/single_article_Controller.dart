@@ -5,7 +5,7 @@ import 'package:tec/models/article_model.dart';
 import 'package:tec/models/fake_data.dart';
 import 'package:tec/models/tags_model.dart';
 import 'package:tec/services/dio_services.dart';
-import 'package:tec/view/single.dart';
+import 'package:tec/view/articles/single.dart';
 
 class SingleArticleController extends GetxController {
   RxList<TagsModel> tagList = RxList();

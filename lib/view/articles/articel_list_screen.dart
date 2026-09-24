@@ -6,10 +6,10 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:tec/component/my_Component.dart';
 import 'package:tec/component/my_colors.dart';
 import 'package:tec/component/text_style.dart';
-import 'package:tec/controller/list_article_Controller.dart';
-import 'package:tec/controller/single_article_Controller.dart';
+import 'package:tec/controller/articles/list_article_Controller.dart';
+import 'package:tec/controller/articles/single_article_Controller.dart';
 import 'package:tec/main.dart';
-import 'package:tec/view/single.dart';
+import 'package:tec/view/articles/single.dart';
 
 class ArticleListScreen extends StatelessWidget {
   ArticleListScreen({super.key, this.title = "مقالات جدید"});
@@ -40,7 +40,8 @@ class ArticleListScreen extends StatelessWidget {
                       singlearticleController.getArticleInfo(
                         listArticleController.articleList[index].id,
                       );
-                      Get.toNamed(RoutSingleArticle);
+                      Get.toNamed(NamedRout.RoutSingleArticle);
+                      
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

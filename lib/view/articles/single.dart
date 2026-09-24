@@ -13,11 +13,11 @@ import 'package:tec/component/my_colors.dart';
 import 'package:tec/component/my_strings.dart';
 import 'package:tec/component/text_style.dart';
 import 'package:tec/controller/home_screen_controller.dart';
-import 'package:tec/controller/list_article_Controller.dart';
-import 'package:tec/controller/single_article_Controller.dart';
+import 'package:tec/controller/articles/list_article_Controller.dart';
+import 'package:tec/controller/articles/single_article_Controller.dart';
 import 'package:tec/models/fake_data.dart';
 import 'package:tec/models/fake_data.dart' as singleArticleController;
-import 'package:tec/view/articel_list_screen.dart';
+import 'package:tec/view/articles/articel_list_screen.dart';
 
 class Single extends StatelessWidget {
   @override

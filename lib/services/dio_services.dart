@@ -16,6 +16,11 @@ class DioServices {
         .then((response) {
           log(response.toString());
           return response;
+        })
+        .catchError((err) {
+          if (err is DioError) {
+            return err.response!;
+          }
         });
   }
 
@@ -30,11 +35,16 @@ class DioServices {
           data: dio_service.FormData.fromMap(map),
           options: Options(responseType: ResponseType.json, method: 'POST'),
         )
-        .then((value) {
-          log(value.headers.toString());
-          log(value.data.toString());
-          log(value.statusCode.toString());
-          return value;
+        .then((response) {
+          log(response.headers.toString());
+          log(response.data.toString());
+          log(response.statusCode.toString());
+          return response;
+        })
+        .catchError((err) {
+          if (err is DioError) {
+            return err.response!;
+          }
         });
   }
 }
