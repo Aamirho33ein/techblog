@@ -23,6 +23,6 @@ class RegisterBinding implements Bindings {
 class ArticleManagrBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(ManageArticleController());
+    Get.lazyPut(() => ManageArticleController());
   }
 }

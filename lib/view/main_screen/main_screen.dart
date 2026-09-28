@@ -4,9 +4,10 @@ import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:tec/component/api_constant.dart';
-import 'package:tec/component/my_colors.dart';
-import 'package:tec/component/my_strings.dart';
+import 'package:tec/component/dimens.dart';
+import 'package:tec/constant/api_constant.dart';
+import 'package:tec/constant/my_colors.dart';
+import 'package:tec/constant/my_strings.dart';
 import 'package:tec/controller/register_controller.dart';
 import 'package:tec/services/dio_services.dart';
 import 'package:tec/view/main_screen/home_screnn.dart';
@@ -25,7 +26,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
-    double bodymargin = size.width / 10;
+  
 
     return SafeArea(
       child: Scaffold(
@@ -33,7 +34,7 @@ class MainScreen extends StatelessWidget {
         drawer: Drawer(
           backgroundColor: SolidColors.scofoldBg,
           child: Padding(
-            padding: EdgeInsets.only(right: bodymargin, left: bodymargin),
+            padding: EdgeInsets.only(right: Dimens.bodyMargin, left: Dimens.bodyMargin),
             child: ListView(
               children: [
                 DrawerHeader(
@@ -102,7 +103,7 @@ class MainScreen extends StatelessWidget {
                     HomeScreen(
                       size: size,
                       textTheme: textTheme,
-                      bodymargin: bodymargin,
+                      bodymargin: Dimens.bodyMargin,
                     ),
 
                     ProfileScreen(),
@@ -114,7 +115,7 @@ class MainScreen extends StatelessWidget {
             ),
             BottomNavigation(
               size: size,
-              bodymargin: bodymargin,
+              bodymargin: Dimens.bodyMargin,
               changeScreen: (int value) {
                 selectedPageIndex.value = value;
               },

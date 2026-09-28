@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:tec/component/api_constant.dart';
+import 'package:tec/constant/api_constant.dart';
 import 'package:tec/models/article_info_model.dart';
 import 'package:tec/models/article_model.dart';
 import 'package:tec/models/fake_data.dart';
@@ -14,7 +14,7 @@ class SingleArticleController extends GetxController {
   RxBool loading = true.obs;
   RxBool hasError = false.obs;
   RxInt id = RxInt(0);
-  Rx<ArticleInfoModel> articleInfoModel = ArticleInfoModel().obs;
+  Rx<ArticleInfoModel> articleInfoModel = ArticleInfoModel(null,null,null).obs;
 
   @override
   onInit() {
@@ -22,7 +22,7 @@ class SingleArticleController extends GetxController {
   }
 
   getArticleInfo(var id) async {
-    articleInfoModel = ArticleInfoModel().obs;
+    articleInfoModel = ArticleInfoModel(null,null,null).obs;
     loading.value = true;
     hasError.value = false;
     String userId = "1";

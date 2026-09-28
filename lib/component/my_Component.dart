@@ -8,7 +8,7 @@ import 'package:tec/component/text_style.dart';
 import 'package:tec/controller/home_screen_controller.dart';
 import 'package:tec/controller/articles/single_article_Controller.dart';
 import 'package:tec/models/fake_data.dart';
-import 'package:tec/component/my_colors.dart';
+import 'package:tec/constant/my_colors.dart';
 import 'package:tec/models/tags_model.dart';
 
 class TechDivider extends StatelessWidget {
@@ -31,12 +31,7 @@ class TechDivider extends StatelessWidget {
 }
 
 class MainTags extends StatelessWidget {
-  const MainTags({
-    super.key,
-    required this.textTheme,
-    required this.index,
-
-  });
+  const MainTags({super.key, required this.textTheme, required this.index});
 
   final TextTheme textTheme;
   final int index;
@@ -152,6 +147,36 @@ class singlePageTags extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SeeMoreBlog extends StatelessWidget {
+  const SeeMoreBlog({
+    super.key,
+    required this.bodymargin,
+    required this.textTheme,
+    required this.title,
+  });
+
+  final double bodymargin;
+  final TextTheme textTheme;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(right: bodymargin, bottom: 8),
+      child: Row(
+        children: [
+          ImageIcon(
+            AssetImage("assets/icons/medad.png"),
+            color: SolidColors.seeMore,
+          ),
+          SizedBox(width: 8),
+          Text(title, style: textTheme.headlineSmall),
+        ],
       ),
     );
   }

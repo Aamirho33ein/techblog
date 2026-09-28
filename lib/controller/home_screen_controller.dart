@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:tec/component/api_constant.dart';
+import 'package:tec/constant/api_constant.dart';
 import 'package:tec/models/article_model.dart';
 import 'package:tec/models/podcast_model.dart';
 import 'package:tec/models/poster_model.dart';

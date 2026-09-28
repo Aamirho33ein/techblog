@@ -9,8 +9,8 @@ import 'package:tec/controller/articles/list_article_Controller.dart';
 import 'package:tec/controller/articles/single_article_Controller.dart';
 import 'package:tec/models/fake_data.dart';
 import 'package:tec/component/my_Component.dart';
-import 'package:tec/component/my_colors.dart';
-import 'package:tec/component/my_strings.dart';
+import 'package:tec/constant/my_colors.dart';
+import 'package:tec/constant/my_strings.dart';
 import 'package:tec/view/articles/articel_list_screen.dart';
 import 'package:tec/view/articles/single.dart';
 import 'package:validators/sanitizers.dart';
@@ -337,7 +337,7 @@ class HomeScreen extends StatelessWidget {
                       },
                       child: SeeMoreBlog(
                         bodymargin: bodymargin,
-                        textTheme: textTheme,
+                        textTheme: textTheme, title: 'مشاهده داغ ترین نوشته ها ',
                       ),
                     ),
 
@@ -390,30 +390,3 @@ class SeeMorePodcast extends StatelessWidget {
   }
 }
 
-class SeeMoreBlog extends StatelessWidget {
-  const SeeMoreBlog({
-    super.key,
-    required this.bodymargin,
-    required this.textTheme,
-  });
-
-  final double bodymargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: bodymargin, bottom: 8),
-      child: Row(
-        children: [
-          ImageIcon(
-            AssetImage("assets/icons/medad.png"),
-            color: SolidColors.seeMore,
-          ),
-          SizedBox(width: 8),
-          Text(MyStrings.viewHotestBlog, style: textTheme.headlineSmall),
-        ],
-      ),
-    );
-  }
-}

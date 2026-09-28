@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:tec/component/my_Component.dart';
-import 'package:tec/component/my_colors.dart';
+import 'package:tec/constant/my_colors.dart';
 import 'package:tec/component/text_style.dart';
 import 'package:tec/controller/articles/list_article_Controller.dart';
 import 'package:tec/controller/articles/single_article_Controller.dart';

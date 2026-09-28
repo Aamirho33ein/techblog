@@ -6,10 +6,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tec/binding.dart';
-import 'package:tec/component/my_colors.dart';
+import 'package:tec/constant/my_colors.dart';
 
 import 'package:tec/view/articles/articel_list_screen.dart';
 import 'package:tec/view/articles/manageArticle.dart';
+import 'package:tec/view/articles/single_manage_article.dart';
 import 'package:tec/view/main_screen/home_screnn.dart';
 import 'package:tec/view/main_screen/main_screen.dart';
 import 'package:tec/view/my_cats.dart';
@@ -53,7 +54,9 @@ class MyApp extends StatelessWidget {
           page: () => Single(),
           binding: ArticleBinding(),
         ),
-        GetPage(name: NamedRout.manageArticle, page: () => ManageArticle(),binding: ArticleManagrBinding())
+        GetPage(name: NamedRout.manageArticle, page: () => ManageArticle(),binding: ArticleManagrBinding()),
+
+        GetPage(name: NamedRout.singleManageArticle, page: () => SingleManageArticle(),binding: ArticleManagrBinding()),
       ],
 
       home: SplashScreen(),
@@ -154,4 +157,5 @@ class NamedRout{
 static String RoutMainScrenn = "/MainScreen";
 static String RoutSingleArticle = "/SingleArticle";
 static String manageArticle = "/manageArticle";
+static String singleManageArticle = "/SingleManageArticle";
 }
