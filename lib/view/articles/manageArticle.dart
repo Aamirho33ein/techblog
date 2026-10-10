@@ -130,6 +130,7 @@ class ManageArticle extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
               child: Text("بریم برای نوشتن یه مقاله باحال"),
+             
             ),
           ),
         ),

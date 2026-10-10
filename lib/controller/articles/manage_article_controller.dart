@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tec/constant/api_constant.dart';
@@ -11,12 +12,14 @@ class ManageArticleController extends GetxController {
   RxList<ArticleModel> articleList = RxList.empty();
   RxList<TagsModel> tagList = RxList.empty();
   RxBool Loading = false.obs;
-  Rx<ArticleInfoModel> articleInfoModel = ArticleInfoModel('اینجا عنوان مقاله قرار میگیره ، یه عنوان جذاب انتخاب کن',
-   '''
+  TextEditingController titleTextEditingController = TextEditingController();
+  Rx<ArticleInfoModel> articleInfoModel = ArticleInfoModel(
+    'اینجا عنوان مقاله قرار میگیره ، یه عنوان جذاب انتخاب کن',
+    '''
 من متن و بدنه اصلی مقاله هستم ، اگه میخوای من رو ویرایش کنی و یه مقاله جذاب بنویسی ، نوشته آبی رنگ بالا که نوشته "ویرایش متن اصلی مقاله" رو با انگشتت لمس کن تا وارد ویرایشگر بشی
 ''',
     '',
-     ).obs;
+  ).obs;
 
   @override
   onInit() {
@@ -39,5 +42,11 @@ class ManageArticleController extends GetxController {
       articleList.clear();
       Loading.value = false;
     }
+  }
+
+  updateTitle() {
+    articleInfoModel.update((val) {
+      val!.title = titleTextEditingController.text;
+    });
   }
 }
