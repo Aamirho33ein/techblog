@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart' as dio_service;
 import 'package:get/state_manager.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:tec/constant/storage_const.dart';
 
 class DioServices {
   Dio dio = Dio();
@@ -27,7 +29,10 @@ class DioServices {
   Future<dynamic> postMethod(Map<String, dynamic> map, String url) async {
     dio.options.headers['content-Type'] = "	application/json";
 
-    // TODO read token from storage
+    var token = GetStorage().read(StorageConst.token);
+    if(token!=null){
+      dio.options.headers['authorization'] = token;
+    }
 
     return await dio
         .post(

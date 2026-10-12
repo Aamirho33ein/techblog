@@ -5,19 +5,11 @@ class PosterModel {
   String? title;
   String? image;
 
+  PosterModel({this.id, this.title, this.image});
 
-
-  PosterModel({
-     this.id,
-     this.title,
-     this.image,
-
-  });
-
-  PosterModel.fromjson(Map<String,dynamic> element){
-   id = element["id"];
-   title = element["title"];
-   image = ApiConstant.hostSlUrl +  element["image"];
+  PosterModel.fromjson(Map<String, dynamic> element) {
+    id = element["id"];
+    title = element["title"];
+    image = ApiUrlConstant.hostSlUrl + element["image"];
   }
-
 }

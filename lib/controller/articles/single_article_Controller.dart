@@ -14,7 +14,11 @@ class SingleArticleController extends GetxController {
   RxBool loading = true.obs;
   RxBool hasError = false.obs;
   RxInt id = RxInt(0);
-  Rx<ArticleInfoModel> articleInfoModel = ArticleInfoModel(null,null,null).obs;
+  Rx<ArticleInfoModel> articleInfoModel = ArticleInfoModel(
+    null,
+    null,
+    null,
+  ).obs;
 
   @override
   onInit() {
@@ -22,14 +26,15 @@ class SingleArticleController extends GetxController {
   }
 
   getArticleInfo(var id) async {
-    articleInfoModel = ArticleInfoModel(null,null,null).obs;
+    articleInfoModel = ArticleInfoModel(null, null, null).obs;
     loading.value = true;
     hasError.value = false;
     String userId = "1";
 
     try {
       var response = await DioServices().getMethod(
-        "${ApiConstant.getArticleInfo}${id}&user_id=$userId",);
+        "${ApiUrlConstant.getArticleInfo}${id}&user_id=$userId",
+      );
 
       if (response.statusCode == 200) {
         articleInfoModel.value = ArticleInfoModel.fromjson(response.data);
@@ -42,7 +47,6 @@ class SingleArticleController extends GetxController {
         relatedList.clear();
         response.data['related'].forEach((element) {
           relatedList.add(ArticleModel.fromjson(element));
-          
         });
       } else {
         hasError.value = true;
@@ -52,6 +56,5 @@ class SingleArticleController extends GetxController {
     } finally {
       loading.value = false;
     }
-    
   }
 }

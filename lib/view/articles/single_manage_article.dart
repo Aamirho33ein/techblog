@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -23,6 +24,7 @@ import 'package:tec/models/fake_data.dart';
 import 'package:tec/models/fake_data.dart' as manageArticleController;
 import 'package:tec/services/pick_file.dart';
 import 'package:tec/view/articles/articel_list_screen.dart';
+import 'package:tec/view/articles/article_content_editor.dart';
 import 'package:tec/view/articles/html_contex_edit.dart';
 
 class SingleManageArticle extends StatelessWidget {
@@ -32,18 +34,14 @@ class SingleManageArticle extends StatelessWidget {
       title: 'عنوان مقاله',
       titleStyle: TextStyle(color: SolidColors.scofoldBg),
       content: TextField(
-        
         controller: manageArticleController.titleTextEditingController,
         keyboardType: TextInputType.text,
         style: TextStyle(color: SolidColors.scofoldBg),
-        decoration: InputDecoration(
-          
-          hintText: "اینجا بنویس"),
+        decoration: InputDecoration(hintText: "اینجا بنویس"),
       ),
       backgroundColor: SolidColors.primeryColor,
       radius: 10,
       confirm: ElevatedButton(
-       
         onPressed: () {
           manageArticleController.updateTitle();
           Get.back();
@@ -209,7 +207,7 @@ class SingleManageArticle extends StatelessWidget {
 
                 GestureDetector(
                   onTap: () {
-                    Get.to(HtmlEditorExample(title: '',));
+                    Get.to(() => ArticleContentEditor());
                   },
                   child: SeeMoreBlog(
                     bodymargin: Dimens.halfbodyMargin,
@@ -229,11 +227,41 @@ class SingleManageArticle extends StatelessWidget {
                   ),
                 ),
 
-                SeeMoreBlog(
-                  bodymargin: Dimens.halfbodyMargin,
-                  textTheme: texttheme,
-                  title: 'انتخاب دسته بندی ',
+                GestureDetector(
+                  onTap: () {
+                    chooseCatsBottomSheet(texttheme);
+                  },
+                  child: SeeMoreBlog(
+                    bodymargin: Dimens.halfbodyMargin,
+                    textTheme: texttheme,
+                    title: 'انتخاب دسته بندی ',
+                  ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    manageArticleController.articleInfoModel.value.catName ==
+                            null
+                        ? "هیچ دسته بندی انتخاب نشده"
+                        : manageArticleController
+                              .articleInfoModel
+                              .value
+                              .catName!,
+                    maxLines: 2,
+                    style: texttheme.bodySmall,
+                  ),
+                ),
+
+                ElevatedButton(onPressed: (() async => await manageArticleController.storArticle()),
+                
+                 child: Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: Text(
+                    manageArticleController.Loading.value?
+                    "صبر کنید ..."
+                    :
+                    "ارسال مطلب"),
+                 )),
 
                 SizedBox(height: 16),
 
@@ -275,6 +303,87 @@ class SingleManageArticle extends StatelessWidget {
           }),
         ),
       ),
+    );
+  }
+
+  Widget cats(TextTheme textTheme) {
+    var homeScreenController = Get.find<HomeScreenController>();
+    return SizedBox(
+      height: Get.height / 1.8,
+      child: GridView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: homeScreenController.tagsList.length,
+        itemBuilder: ((context, index) {
+          return GestureDetector(
+            onTap: () async {
+              manageArticleController.articleInfoModel.update((val) {
+                val?.catId =
+                  homeScreenController.tagsList[index].id!;
+                  val?.catName =
+                  homeScreenController.tagsList[index].title!;
+              });
+
+
+
+
+             
+              Get.back();
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Container(
+                height: 30,
+                decoration: BoxDecoration(
+                  color: SolidColors.primeryColor,
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text(
+                      homeScreenController.tagsList[index].title!,
+                      style: textTheme.headlineMedium,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        }),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
+        ),
+      ),
+    );
+  }
+
+  chooseCatsBottomSheet(TextTheme textTheme) {
+    Get.bottomSheet(
+      Container(
+        height: Get.height / 1.5,
+        width: Get.width,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Text("انتخاب دسته بندی"),
+              SizedBox(height: 22),
+              cats(textTheme),
+            ],
+          ),
+        ),
+      ),
+      isScrollControlled: true,
+      persistent: true,
     );
   }
 }

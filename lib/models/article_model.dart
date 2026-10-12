@@ -12,7 +12,6 @@ class ArticleModel {
   String? createdAt;
   // String? isFavorite;
 
-
   ArticleModel({
     required this.id,
     required this.title,
@@ -26,16 +25,15 @@ class ArticleModel {
     // this.isFavorite,
   });
 
-  ArticleModel.fromjson(Map<String,dynamic> element){
-   id = element["id"];
-   title = element["title"];
-   image = ApiConstant.hostSlUrl+ element["image"];
-   catId = element["cat_id"];
-   catName  = element["cat_name"];
-   author  = element["author"];
-   view  = element["view"];
-   status  = element["status"];
-   createdAt  = element["created_at"]; 
+  ArticleModel.fromjson(Map<String, dynamic> element) {
+    id = element["id"];
+    title = element["title"];
+    image = ApiUrlConstant.hostSlUrl + element["image"];
+    catId = element["cat_id"];
+    catName = element["cat_name"];
+    author = element["author"];
+    view = element["view"];
+    status = element["status"];
+    createdAt = element["created_at"];
   }
-
 }

@@ -24,7 +24,7 @@ class PodcastModel {
   PodcastModel.fromjson(Map<String, dynamic> element) {
     id = element["id"];
     title = element["title"];
-    poster = ApiConstant.hostSlUrl + element["poster"];
+    poster = ApiUrlConstant.hostSlUrl + element["poster"];
     catName = element["cat_name"];
     author = element["author"];
     view = element["view"];
@@ -32,7 +32,3 @@ class PodcastModel {
     createdAt = element["created_at"];
   }
 }
-
-
-
-

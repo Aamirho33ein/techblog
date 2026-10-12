@@ -20,7 +20,7 @@ class ListArticleController extends GetxController {
     // TODO get userid from getStorage ApiConstant.getArticleList + user id
     String userId = "1";
     var response = await DioServices().getMethod(
-      ApiConstant.getArticleList + userId,
+      ApiUrlConstant.getArticleList + userId,
     );
 
     if (response.statusCode == 200) {
@@ -41,10 +41,11 @@ class ListArticleController extends GetxController {
     //   'tag_id': id,
     //   'user_id': '',
     // };
-    final uri = 'https://techblog.sasansafari.com/Techblog/api/article/get.php'
-      '?command=get_articles_with_tag_id'
-      '&tag_id=$id'
-      '&user_id=';
+    final uri =
+        'https://techblog.sasansafari.com/Techblog/api/article/get.php'
+        '?command=get_articles_with_tag_id'
+        '&tag_id=$id'
+        '&user_id=';
     var response = await DioServices().getMethod(uri.toString());
 
     if (response.statusCode == 200) {
