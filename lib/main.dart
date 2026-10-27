@@ -15,6 +15,7 @@ import 'package:tec/view/articles/single_manage_article.dart';
 import 'package:tec/view/main_screen/home_screnn.dart';
 import 'package:tec/view/main_screen/main_screen.dart';
 import 'package:tec/view/my_cats.dart';
+import 'package:tec/view/podcast/single_podcast.dart';
 import 'package:tec/view/register/register_intro.dart';
 import 'package:tec/view/articles/single.dart';
 import 'package:tec/view/splash_screen.dart';
@@ -55,9 +56,19 @@ class MyApp extends StatelessWidget {
           page: () => Single(),
           binding: ArticleBinding(),
         ),
-        GetPage(name: NamedRout.manageArticle, page: () => ManageArticle(),binding: ArticleManagrBinding()),
+        GetPage(
+          name: NamedRout.manageArticle,
+          page: () => ManageArticle(),
+          binding: ArticleManagrBinding(),
+        ),
 
-        GetPage(name: NamedRout.singleManageArticle, page: () => SingleManageArticle(),binding: ArticleManagrBinding()),
+        GetPage(
+          name: NamedRout.singleManageArticle,
+          page: () => SingleManageArticle(),
+          binding: ArticleManagrBinding(),
+        ),
+
+        GetPage(name: NamedRout.singlePodcast, page: () => SinglePodcast()),
       ],
 
       home: SplashScreen(),
@@ -151,12 +162,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class NamedRout {
+  NamedRout._();
 
-
-
-class NamedRout{
-static String RoutMainScrenn = "/MainScreen";
-static String RoutSingleArticle = "/SingleArticle";
-static String manageArticle = "/manageArticle";
-static String singleManageArticle = "/SingleManageArticle";
+  static String RoutMainScrenn = "/MainScreen";
+  static String RoutSingleArticle = "/SingleArticle";
+  static String manageArticle = "/manageArticle";
+  static String singleManageArticle = "/SingleManageArticle";
+  static String singlePodcast = "/SinglePodcast";
 }

@@ -4,6 +4,7 @@ import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:tec/component/decrations.dart';
 import 'package:tec/component/dimens.dart';
 import 'package:tec/constant/api_constant.dart';
 import 'package:tec/constant/my_colors.dart';
@@ -159,10 +160,7 @@ class BottomNavigation extends StatelessWidget {
           padding: EdgeInsets.only(left: bodymargin, right: bodymargin),
           child: Container(
             height: size.height / 8,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: GradiantColors.bottomNav),
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-            ),
+            decoration: MyDecoration.mainGradiant,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

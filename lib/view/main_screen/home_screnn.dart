@@ -7,12 +7,14 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:tec/controller/home_screen_controller.dart';
 import 'package:tec/controller/articles/list_article_Controller.dart';
 import 'package:tec/controller/articles/single_article_Controller.dart';
+import 'package:tec/main.dart';
 import 'package:tec/models/fake_data.dart';
 import 'package:tec/component/my_Component.dart';
 import 'package:tec/constant/my_colors.dart';
 import 'package:tec/constant/my_strings.dart';
 import 'package:tec/view/articles/articel_list_screen.dart';
 import 'package:tec/view/articles/single.dart';
+import 'package:tec/view/podcast/single_podcast.dart';
 import 'package:validators/sanitizers.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -170,56 +172,61 @@ class HomeScreen extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               // blog item
-              return Padding(
-                padding: EdgeInsets.only(right: index == 0 ? bodymargin : 15),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        height: size.height / 5.5,
-                        width: size.width / 2.2,
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              homeScreenController.topPodcasts[index].poster!,
-                          imageBuilder: (context, imageProvider) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(16),
+              return GestureDetector(
+                onTap: () {
+                  Get.toNamed(NamedRout.singlePodcast,arguments: homeScreenController.topPodcasts[index]);
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(right: index == 0 ? bodymargin : 15),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: size.height / 5.5,
+                          width: size.width / 2.2,
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                homeScreenController.topPodcasts[index].poster!,
+                            imageBuilder: (context, imageProvider) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(16),
+                                  ),
+                                  image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
-                          },
-                          placeholder: (context, url) => SpinKitFadingCube(
-                            color: SolidColors.primeryColor,
-                            size: 32,
-                          ),
-                          errorWidget: (context, url, error) => const Icon(
-                            Icons.image_not_supported_outlined,
-                            size: 50,
-                            color: Colors.grey,
+                              );
+                            },
+                            placeholder: (context, url) => SpinKitFadingCube(
+                              color: SolidColors.primeryColor,
+                              size: 32,
+                            ),
+                            errorWidget: (context, url, error) => const Icon(
+                              Icons.image_not_supported_outlined,
+                              size: 50,
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: size.width / 2.4,
-                      child: Text(
-                        textAlign: TextAlign.center,
-                        homeScreenController.topPodcasts[index].title!,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                      SizedBox(
+                        width: size.width / 2.4,
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          homeScreenController.topPodcasts[index].title!,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },
@@ -297,8 +304,8 @@ class HomeScreen extends StatelessWidget {
                     .getArticleListWhithTagId(
                       homeScreenController.tagsList[index].id!,
                     );
-                    String tagName = homeScreenController.tagsList[index].title!;
-                Get.to(ArticleListScreen(title: tagName,));
+                String tagName = homeScreenController.tagsList[index].title!;
+                Get.to(ArticleListScreen(title: tagName));
               },
               child: Padding(
                 padding: EdgeInsets.fromLTRB(
@@ -337,7 +344,8 @@ class HomeScreen extends StatelessWidget {
                       },
                       child: SeeMoreBlog(
                         bodymargin: bodymargin,
-                        textTheme: textTheme, title: 'مشاهده داغ ترین نوشته ها ',
+                        textTheme: textTheme,
+                        title: 'مشاهده داغ ترین نوشته ها ',
                       ),
                     ),
 
@@ -389,4 +397,3 @@ class SeeMorePodcast extends StatelessWidget {
     );
   }
 }
-
